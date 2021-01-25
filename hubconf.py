@@ -7,14 +7,18 @@ Usage:
 
 from pathlib import Path
 
+import sys
 import torch
 
+import yolov5_models
 from yolov5_models.yolo import Model
 from yolov5_utils.general import set_logging
 from yolov5_utils.google_utils import attempt_download
 
 dependencies = ['torch', 'yaml']
 set_logging()
+sys.modules['models.yolo'] = yolov5_models.yolo
+sys.modules['models.common'] = yolov5_models.common
 
 
 def create(name, pretrained, channels, classes, autoshape):
