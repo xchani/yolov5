@@ -10,8 +10,8 @@ from pathlib import Path
 import torch
 
 from yolov5_models.yolo import Model
-from utils.general import set_logging
-from utils.google_utils import attempt_download
+from yolov5_utils.general import set_logging
+from yolov5_utils.google_utils import attempt_download
 
 dependencies = ['torch', 'yaml']
 set_logging()

@@ -48,7 +48,7 @@ COPY . /usr/src/app
 # id=5a9b5863d93d && sudo docker start $id && sudo docker exec -it $id bash
 
 # Send weights to GCP
-# python -c "from utils.general import *; strip_optimizer('runs/train/exp0_*/weights/best.pt', 'tmp.pt')" && gsutil cp tmp.pt gs://*.pt
+# python -c "from yolov5_utils.general import *; strip_optimizer('runs/train/exp0_*/weights/best.pt', 'tmp.pt')" && gsutil cp tmp.pt gs://*.pt
 
 # Clean up
 # docker system prune -a --volumes

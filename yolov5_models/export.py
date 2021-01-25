@@ -15,8 +15,8 @@ import torch.nn as nn
 
 import yolov5_models
 from yolov5_models.experimental import attempt_load
-from utils.activations import Hardswish, SiLU
-from utils.general import set_logging, check_img_size
+from yolov5_utils.activations import Hardswish, SiLU
+from yolov5_utils.general import set_logging, check_img_size
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
