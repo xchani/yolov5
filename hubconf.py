@@ -9,7 +9,7 @@ from pathlib import Path
 
 import torch
 
-from models.yolo import Model
+from yolov5_models.yolo import Model
 from utils.general import set_logging
 from utils.google_utils import attempt_download
 
@@ -29,7 +29,7 @@ def create(name, pretrained, channels, classes, autoshape):
     Returns:
         pytorch model
     """
-    config = Path(__file__).parent / 'models' / f'{name}.yaml'  # model.yaml path
+    config = Path(__file__).parent / 'yolov5_models' / f'{name}.yaml'  # model.yaml path
     try:
         model = Model(config, channels, classes)
         if pretrained:

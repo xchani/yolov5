@@ -1,7 +1,7 @@
 """Exports a YOLOv5 *.pt model to ONNX and TorchScript formats
 
 Usage:
-    $ export PYTHONPATH="$PWD" && python models/export.py --weights ./weights/yolov5s.pt --img 640 --batch 1
+    $ export PYTHONPATH="$PWD" && python yolov5_models/export.py --weights ./weights/yolov5s.pt --img 640 --batch 1
 """
 
 import argparse
@@ -13,8 +13,8 @@ sys.path.append('./')  # to run '$ python *.py' files in subdirectories
 import torch
 import torch.nn as nn
 
-import models
-from models.experimental import attempt_load
+import yolov5_models
+from yolov5_models.experimental import attempt_load
 from utils.activations import Hardswish, SiLU
 from utils.general import set_logging, check_img_size
 
@@ -43,12 +43,12 @@ if __name__ == '__main__':
     # Update model
     for k, m in model.named_modules():
         m._non_persistent_buffers_set = set()  # pytorch 1.6.0 compatibility
-        if isinstance(m, models.common.Conv):  # assign export-friendly activations
+        if isinstance(m, yolov5_models.common.Conv):  # assign export-friendly activations
             if isinstance(m.act, nn.Hardswish):
                 m.act = Hardswish()
             elif isinstance(m.act, nn.SiLU):
                 m.act = SiLU()
-        # elif isinstance(m, models.yolo.Detect):
+        # elif isinstance(m, yolov5_models.yolo.Detect):
         #     m.forward = m.forward_export  # assign forward (optional)
     model.model[-1].export = True  # set Detect() layer export=True
     y = model(img)  # dry run
