@@ -7,10 +7,12 @@ Usage:
 
 from pathlib import Path
 
+import os
 import sys
 import torch
 
 import yolov5_models
+from os import path as osp
 from yolov5_models.yolo import Model
 from yolov5_utils.general import set_logging
 from yolov5_utils.google_utils import attempt_download
@@ -37,7 +39,8 @@ def create(name, pretrained, channels, classes, autoshape):
     try:
         model = Model(config, channels, classes)
         if pretrained:
-            fname = f'{name}.pt'  # checkpoint filename
+            fname = f'checkpoints/{name}.pt'  # checkpoint filename
+            os.makedirs(osp.dirname(fname), exist_ok=True)
             attempt_download(fname)  # download if not found locally
             ckpt = torch.load(fname, map_location=torch.device('cpu'))  # load
             state_dict = ckpt['model'].float().state_dict()  # to FP32
